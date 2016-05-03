@@ -13,13 +13,16 @@
 template<int LOW, int HIGH>
 struct BOUNDS
 {
+    enum { LOWER  = LOW };
+    enum { HIGHER = HIGH };
+
     static inline void check(int x)
     {
         if (x < LOW || x > HIGH)
         {
             throw "x out of bounds!";
         }
-    }
+    };
 };
 
 /**
@@ -28,6 +31,9 @@ struct BOUNDS
 template<class BOUNDS>
 struct X
 {
+    enum { LOWER  = BOUNDS::LOWER };
+    enum { HIGHER = BOUNDS::HIGHER };
+
     static inline int eval(int x)
     {
         BOUNDS::check(x);
@@ -41,6 +47,9 @@ struct X
 template<int V>
 struct LIT
 {
+    enum { LOWER  = V };
+    enum { HIGHER = V };
+
     static inline int eval(int x)
     {
         return (int)V;
@@ -53,6 +62,9 @@ struct LIT
 template<class A, class B>
 struct ADD
 {
+    enum { LOWER  = A::LOWER + B::LOWER };
+    enum { HIGHER = A::HIGHER + B::HIGHER };
+
     static inline int eval(int x)
     {
         return A::eval(x) + B::eval(x);
@@ -65,6 +77,9 @@ struct ADD
 template<class A, class B>
 struct SUB
 {
+    enum { LOWER  = A::LOWER - B::HIGHER };
+    enum { HIGHER = A::HIGHER - B::LOWER };
+
     static inline int eval(int x)
     {
         return A::eval(x) - B::eval(x);
@@ -77,6 +92,9 @@ struct SUB
 template <class A, class B>
 struct MUL 
 {
+    enum { LOWER  = A::LOWER * B::LOWER };
+    enum { HIGHER = B::HIGHER * B::HIGHER };
+
     static inline int eval(int x)
     {
         return A::eval(x) * B::eval(x);
@@ -89,6 +107,9 @@ struct MUL
 template<class A, class B>
 struct DIV
 {
+    enum { LOWER  = A::LOWER / A::HIGHER };
+    enum { HIGHER = A::HIGHER / B::LOWER };
+
     static inline int eval(int x)
     {
         return A::eval(x) / B::eval(x);

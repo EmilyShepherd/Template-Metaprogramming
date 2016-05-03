@@ -14,7 +14,8 @@ int main()
     // Random Factorial: (x + 4)(x - 7)
     MUL< ADD< VAR , LIT<4> > , SUB< VAR , LIT<7> > > factorial;
 
-    printf("Bounds: 0, 20\n");
+    printf("Given Bounds: 0, 20\n");
+    printf("Calculated Bounds: %d, %d\n", factorial.LOWER, factorial.HIGHER);
 
     printf("Trying x = 4, expecting success... ");
     try
