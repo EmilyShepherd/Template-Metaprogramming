@@ -1,6 +1,4 @@
 
-GCC = g++
-
 .PHONY: all
 
 all: part1 part2 part3
@@ -13,3 +11,6 @@ part2:
 
 part3:
 	cd Part3 && make
+
+handin.zip: makefile Part*/main.cpp Part*/makefile Part*/operators.hpp
+	zip $@ $^
