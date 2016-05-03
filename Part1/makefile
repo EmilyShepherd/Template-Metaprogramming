@@ -1,5 +1,12 @@
 
 GCC=g++
 
-all: main.cpp operators.hpp
+.PHONY: all clean
+
+all: a.out
+
+a.out: main.cpp operators.hpp
 	$(GCC) $< -I.
+
+clean:
+	rm a.out
